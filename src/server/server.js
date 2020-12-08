@@ -19,7 +19,7 @@ app.use(cors());
 // app.use(express.static("website"));
 app.use(express.static("dist"));
 
-const port = 8000;
+const port = 8080;
 // Setup Server
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
