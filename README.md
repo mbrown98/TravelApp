@@ -1,5 +1,7 @@
 # Travel App
 
+![screen-gif](./src/client/media/screen.gif)
+
 ## Overview
 
 This travel app "TRIP" allows a user to enter a location, and the duration of their trip. This information is used to fetch and return data to the user regarding the weather during their trip, and key information about the country they are visiting.
