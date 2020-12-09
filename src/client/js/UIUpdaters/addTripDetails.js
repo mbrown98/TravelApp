@@ -1,7 +1,6 @@
 import moment from "moment";
 
 async function addTripDetails(data) {
-  console.log("trip detials run", data);
   const tripDetailsContainer = document.getElementById("tripDetails");
 
   const startDate = document.getElementById("startingDateInputText").value;
