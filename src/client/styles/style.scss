@@ -45,10 +45,29 @@ body {
 
 .currentTrip {
   grid-area: currentTrip;
-  background: #deb887;
+  background-image: url("../media/travel.jpg");
   padding: 10px;
 }
 
 #subTitle {
   font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  #app {
+    grid-template-columns: 1fr;
+    grid-template-areas: "leftContent" "currentTrip";
+  }
+  .leftContent {
+    grid-area: leftContent;
+    grid-gap: 1em;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-areas: "title" "tripInputs";
+  }
+  .currentTrip {
+    grid-area: currentTrip;
+    background-image: url("../media/travel.jpg");
+    padding: 10px;
+  }
 }

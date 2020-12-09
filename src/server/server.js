@@ -1,7 +1,16 @@
+const geoNamesBase = "http://api.geonames.org/searchJSON?formatted=true&q=";
+const geoNamesUser = "mbrown98";
+
+const weatherbitAPIKey = "ab52817cb9374b82af15c1cd2179fa37";
+const weatherbitBaseURL = "https://api.weatherbit.io/v2.0/forecast/daily?lat=";
+
+const pixabayKey = "19450151-fc766a8911e68f3e4051bc05f";
+
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
 // Require Express to run server and routes
+const axios = require("axios");
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -31,11 +40,36 @@ app.get("/data", function (req, res) {
   res.send(projectData);
 });
 
-app.post("/data", function (req, res) {
-  //takes needed values from req, and adds them to projectData
-  projectData.temperature = req.body.main.temp;
-  projectData.date = req.body.newDate;
-  projectData.userInput = req.body.userInput;
-  //sends back updated projectData
-  res.send(projectData);
+app.post("/geonamesData", async function (req, res) {
+  const location = req.body.location;
+  const geoNamesURL = geoNamesBase + location + "&username=" + geoNamesUser;
+  const response = await axios.get(geoNamesURL);
+  const locationData = response.data.geonames[0];
+  res.send({ locationData: locationData });
+});
+
+app.post("/weatherbitData", async function (req, res) {
+  const lat = req.body.data.lat;
+  const long = req.body.data.lng;
+  const response = await axios.get(
+    weatherbitBaseURL +
+      lat +
+      "&lon=" +
+      long +
+      "&units=I&key=" +
+      weatherbitAPIKey
+  );
+  res.send({ weatherData: response.data });
+});
+
+app.post("/pixabayData", async function (req, res) {
+  const searchTerm = req.body.searchTerm;
+  var URL =
+    "https://pixabay.com/api/?key=" +
+    pixabayKey +
+    "&q=" +
+    encodeURIComponent(searchTerm);
+  const response = await axios.get(URL);
+
+  res.send({ weatherData: response.data.hits[0] });
 });

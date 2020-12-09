@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elements</title>
+<title>TRIP</title>
 <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 </head>
 
@@ -11,25 +11,25 @@
 <div id = "app">
   <div class="leftContent">
     <div class="title">
-      <header>Elements</header>
+      <header>TRIP</header>
       <p id="subTitle">Get all the weather information you need for your next trip</p>
       </div>
 
     <div class="tripInputs">
       <div class="locationInput tripInput">Location: <input type="text" id="locationInputText" placeholder="Location"></input></div>
-      <div class="startInput tripInput">Start Date: <input type="text" id="startingDateInputText" placeholder="MM/DD/YY"></input></div>
-      <div class="endInput tripInput">End  Date: <input type="text" id="endingDateInputText" placeholder="MM/DD/YY"></input></div>
-      <button id="generate" class="tripInput">Generate Elements</button>
+      <div class="startInput tripInput">Start Date: <input type="date" id="startingDateInputText" placeholder="MM/DD/YY"></input></div>
+      <div class="endInput tripInput">End  Date: <input type="date" id="endingDateInputText" placeholder="MM/DD/YY"></input></div>
+      <button id="generate" class="tripInput">Generate Trip</button>
     </div>
   </div>
- <div class="currentTrip">
-   <div class="currentTripLocation">Location</div>
-   <div>Depart</div>
-   <div>Return</div>
-   <div>Duration</div>
-   <div>Time Until Flight: </div>
-   <div>Weather:</div>
-   <div> Things to do in Location:</div>
+ <div class="currentTrip" id="currentTripContainer">
+   <div id="currentTripLocation"></div>
+   <div id="currentTripDepart"></div>
+   <div id="currentTripReturn"></div>
+   <div id="currentTripDuration"></div>
+   <div id="currentTripTimeUntil"> </div>
+   <!-- <div id="currentTripLocation">Weather:</div>
+   <div id="currentTripLocation"> Things to do in Location:</div> -->
  </div>
   </div>
 </body>
