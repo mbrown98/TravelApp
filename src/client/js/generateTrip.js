@@ -76,9 +76,7 @@ async function getPixabayData(data) {
 }
 
 async function getCountryInfo(data) {
-  console.log("counttttt", data);
   const countryCode = data.location.countryCode;
-  console.log("This will add country info", countryCode);
   const response = await fetch(nodeServerURL + "/getCountryInfo", {
     method: "POST",
     credentials: "same-origin",

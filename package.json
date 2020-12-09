@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "core-js": "^3.8.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -30,6 +31,8 @@
     "moment": "^2.29.1",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
+    "regenerator-runtime": "^0.13.7",
+    "supertest": "^6.0.1",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.11.0"
