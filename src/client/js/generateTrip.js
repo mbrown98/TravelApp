@@ -1,19 +1,27 @@
 import { updateUI } from "./updateUI";
+
 const nodeServerURL = "http://localhost:8080";
 
 async function generateTrip() {
   const location = document.getElementById("locationInputText").value;
-
-  getGeoData(location)
-    .then((data) => {
-      return getWeatherbitData(data);
-    })
-    .then((data) => {
-      return getPixabayData(data);
-    })
-    .then((pageData) => {
-      updateUI(pageData);
-    });
+  const departDay = document.getElementById("startingDateInputText").value;
+  const returnDay = document.getElementById("endingDateInputText").value;
+  console.log("ddd", departDay);
+  if (location && departDay && returnDay) {
+    console.log(departDay);
+    getGeoData(location)
+      .then((data) => {
+        return getWeatherbitData(data);
+      })
+      .then((data) => {
+        return getPixabayData(data);
+      })
+      .then((pageData) => {
+        updateUI(pageData);
+      });
+  } else {
+    window.alert("Please enter Location, Start Date, and End Date");
+  }
 }
 
 async function getGeoData(location) {
@@ -65,4 +73,5 @@ async function getPixabayData(data) {
 }
 
 document.getElementById("generate").addEventListener("click", generateTrip);
+
 export { generateTrip };
