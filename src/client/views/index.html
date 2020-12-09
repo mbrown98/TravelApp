@@ -8,45 +8,39 @@
 </head>
 
 <body>
-<div id = "app">
-  <div class="leftContent">
-    <div class="title" id="titleBox">
-      <header>TRIP</header>
-      <p id="subTitle">Get all the weather information you need for your trip within the next two weeks</p>
-      </div>
+  <div id = "app">
+    <div class="leftContent">
+      <div class="title" id="titleBox">
+        <header>TRIP</header>
+          <p id="subTitle">Get all the weather information you need for your trip within the next two weeks</p>
+        </div>
 
-    <div class="tripInputs">
-      <div id="tripCreation">
-        <div class="locationInput tripInput">Location: <input type="text" id="locationInputText" placeholder="Location"></input></div>
-        <div class="startInput tripInput">Start Date: <input type="date" id="startingDateInputText" placeholder="MM/DD/YY"></input></div>
-        <div class="endInput tripInput">End  Date: <input type="date" id="endingDateInputText" placeholder="MM/DD/YY"></input></div>
-        <button id="generate" class="tripInput">Generate Trip</button>
+      <div class="tripInputs">
+        <div id="tripCreation">
+          <div class="locationInput tripInput">Location: <input type="text" id="locationInputText" placeholder="Location"></input></div>
+          <div class="startInput tripInput">Start Date: <input type="date" id="startingDateInputText" placeholder="MM/DD/YY"></input></div>
+          <div class="endInput tripInput">End  Date: <input type="date" id="endingDateInputText" placeholder="MM/DD/YY"></input></div>
+          <button id="generate" class="tripInput">Generate Trip</button>
+        </div>
+        <div id="tripDetails">
+          <h3>Trip Details</h3>
+          <div id="tripLogistics"> 
+          <div id="currentTripLocation"></div>
+          <div id="currentTripDepart"></div>
+          <div id="currentTripReturn"></div>
+          <div id="currentTripDuration"></div>
+          <div id="currentTripTimeUntil"> </div>
+        </div>
+        </div>
       </div>
-      <div id="tripDetails">
-        <h3>Trip Details</h3>
-        <div id="tripLogistics"> 
-         <div id="currentTripLocation"></div>
-         <div id="currentTripDepart"></div>
-         <div id="currentTripReturn"></div>
-         <div id="currentTripDuration"></div>
-         <div id="currentTripTimeUntil"> </div>
-       </div>
-  
     </div>
-  
-   
+    <div class="currentTrip" id="currentTripContainer">
+    <div id="countryInfo"></div> 
+      <div id="weatherContainer"></div>
     </div>
-   
   </div>
- <div class="currentTrip" id="currentTripContainer">
-  <div id="countryInfo"></div> 
-    <div id="weatherContainer"></div>
-  
-   </div>
- </div>
   </div>
 </body>
-
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

@@ -3,7 +3,7 @@ const geoNamesUser = "mbrown98";
 
 const weatherbitAPIKey = "ab52817cb9374b82af15c1cd2179fa37";
 const weatherbitBaseURL = "https://api.weatherbit.io/v2.0/forecast/daily?lat=";
-
+const pixabayBaseURL = "https://pixabay.com/api/?key=";
 const pixabayKey = "19450151-fc766a8911e68f3e4051bc05f";
 
 const axios = require("axios");
@@ -55,10 +55,7 @@ app.post("/weatherbitData", async function (req, res) {
 app.post("/pixabayData", async function (req, res) {
   const searchTerm = req.body.searchTerm;
   var URL =
-    "https://pixabay.com/api/?key=" +
-    pixabayKey +
-    "&q=" +
-    encodeURIComponent(searchTerm);
+    pixabayBaseURL + pixabayKey + "&q=" + encodeURIComponent(searchTerm);
   const response = await axios.get(URL);
 
   res.send({ weatherData: response.data.hits[0] });
