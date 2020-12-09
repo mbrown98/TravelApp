@@ -32,11 +32,15 @@ body {
 
 .tripInputs {
   grid-area: tripInputs;
+
   background: #87adde;
-  padding: 10px;
+}
+
+#tripCreation {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  padding: 10px;
 }
 .tripInput {
   margin: 10px;
@@ -47,6 +51,7 @@ body {
   grid-area: currentTrip;
   background-image: url("../media/travel.jpg");
   padding: 10px;
+  height: auto;
 }
 
 #subTitle {
@@ -78,6 +83,10 @@ body {
 }
 
 .weatherContainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#tripDetails {
+  padding: 10px;
 }

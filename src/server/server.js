@@ -73,3 +73,15 @@ app.post("/pixabayData", async function (req, res) {
 
   res.send({ weatherData: response.data.hits[0] });
 });
+
+app.post("/getCountryInfo", async function (req, res) {
+  const countryCode = req.body.countryCode;
+  console.log("CC", countryCode);
+
+  const response = await axios.get(
+    `https://restcountries.eu/rest/v2/alpha/${countryCode}`
+  );
+  console.log(response.data);
+
+  res.send({ countryData: response.data });
+});

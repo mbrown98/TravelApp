@@ -6,7 +6,7 @@ async function generateTrip() {
   const location = document.getElementById("locationInputText").value;
   const departDay = document.getElementById("startingDateInputText").value;
   const returnDay = document.getElementById("endingDateInputText").value;
-  console.log("ddd", departDay);
+
   if (location && departDay && returnDay) {
     console.log(departDay);
     getGeoData(location)
@@ -15,6 +15,9 @@ async function generateTrip() {
       })
       .then((data) => {
         return getPixabayData(data);
+      })
+      .then((data) => {
+        return getCountryInfo(data);
       })
       .then((pageData) => {
         updateUI(pageData);
@@ -69,6 +72,23 @@ async function getPixabayData(data) {
   });
   const responseJSON = await response.json();
   data.pictures = responseJSON;
+  return data;
+}
+
+async function getCountryInfo(data) {
+  console.log("counttttt", data);
+  const countryCode = data.location.countryCode;
+  console.log("This will add country info", countryCode);
+  const response = await fetch(nodeServerURL + "/getCountryInfo", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ countryCode: countryCode }),
+  });
+  const responseJSON = await response.json();
+  data.countryData = responseJSON;
   return data;
 }
 

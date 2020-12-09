@@ -4,28 +4,12 @@ import moment from "moment";
 async function updateUI(pageData) {
   console.log("pageData", pageData);
   addTripDetails(pageData);
-  addWeather(pageData);
   addCountryInfo(pageData);
+  addWeather(pageData);
 }
 
 async function addTripDetails(data) {
   const tripDetailsContainer = document.getElementById("tripDetails");
-
-  const detailsHeader = document.createElement("h1");
-  detailsHeader.innerHTML = "Trip Details";
-  detailsHeader.style.backgroundColor = "#87adde";
-  detailsHeader.style.padding = "10px";
-  detailsHeader.style.borderRadius = "10px";
-  detailsHeader.style.width = "fit-content";
-  tripDetailsContainer.insertAdjacentElement("afterbegin", detailsHeader);
-
-  const tripLogistics = document.getElementById("tripLogistics");
-  tripLogistics.style.backgroundColor = "#deb887";
-  tripLogistics.style.width = "fit-content";
-  tripLogistics.style.margin = "10px";
-  tripLogistics.style.padding = "5px";
-  tripLogistics.style.fontSize = "20px";
-  tripLogistics.style.borderRadius = "10px";
 
   const startDate = document.getElementById("startingDateInputText").value;
   const endDate = document.getElementById("endingDateInputText").value;
@@ -47,7 +31,7 @@ async function addTripDetails(data) {
     "Trip is lasting " + tripDuration;
 
   document.getElementById("currentTripTimeUntil").innerHTML =
-    "Trip Starts " + timeUntilTrip;
+    "Trip starts " + timeUntilTrip;
 
   document.getElementById("currentTripLocation").innerHTML =
     "Location: " + data.location.name;
@@ -70,23 +54,87 @@ async function addWeather(data) {
   weatherHeader.style.width = "fit-content";
   weatherContainer.appendChild(weatherHeader);
 
+  const startDate = document.getElementById("startingDateInputText").value;
+  const endDate = document.getElementById("endingDateInputText").value;
+
+  let weatherMap = false;
+
   for (const day of weatherArray) {
-    const weatherCard = document.createElement("div");
-    let cardContent = `<p>Day: ${day.valid_date}</p><p>Average Temp: ${day.temp}</p><p>Chance of Precipitation: ${day.pop}%</p>`;
-    weatherCard.innerHTML = cardContent;
-    weatherCard.style.backgroundColor = "#deb887";
-    weatherCard.style.width = "fit-content";
-    weatherCard.style.float = "left";
-    weatherCard.style.margin = "10px";
-    weatherCard.style.padding = "5px";
-    weatherCard.style.fontSize = "12px";
-    weatherCard.style.borderRadius = "10px";
-    weatherContainer.appendChild(weatherCard);
+    if (startDate === day.valid_date) weatherMap = true;
+
+    if (weatherMap) {
+      const weatherCard = document.createElement("div");
+      let cardContent = `<p>Day: ${day.valid_date}</p><p>Average Temp: ${day.temp} F</p><p>Chance of Precipitation: ${day.pop}%</p>`;
+      weatherCard.innerHTML = cardContent;
+      weatherCard.style.backgroundColor = "#deb887";
+      weatherCard.style.width = "fit-content";
+      weatherCard.style.float = "left";
+      weatherCard.style.margin = "10px";
+      weatherCard.style.padding = "5px";
+      weatherCard.style.fontSize = "12px";
+      weatherCard.style.borderRadius = "10px";
+      weatherContainer.appendChild(weatherCard);
+    }
+    if (endDate === day.valid_date) break;
   }
 }
 
 async function addCountryInfo(data) {
-  console.log("This will add country info");
+  const countryData = data.countryData.countryData;
+
+  // document.getElementById(
+  //   "titleBox"
+  // ).style.background = `url(${countryData.flag})`;
+
+  const countryInfoContainer = document.getElementById("countryInfo");
+  countryInfoContainer.innerHTML = "";
+
+  const countryInfoHeader = document.createElement("h1");
+  countryInfoHeader.innerHTML = "Country Info";
+  countryInfoHeader.style.backgroundColor = "#87adde";
+  countryInfoHeader.style.padding = "10px";
+  countryInfoHeader.style.borderRadius = "10px";
+  countryInfoHeader.style.width = "fit-content";
+  countryInfoContainer.appendChild(countryInfoHeader);
+
+  const countryDataArray = [
+    { name: "Currency", value: countryData.currencies },
+    { name: "Capital", value: countryData.capital },
+    { name: "Population", value: countryData.population },
+    { name: "Languages", value: countryData.languages },
+    { name: "Region", value: countryData.region },
+    { name: "Borders", value: countryData.borders },
+  ];
+
+  for (const info of countryDataArray) {
+    const infoCard = document.createElement("div");
+    let cardContent = `<div>${info.name}: ${
+      Array.isArray(info.value)
+        ? infoArrayFunc(info.value, info.name)
+        : info.value
+    }</div>`;
+    infoCard.innerHTML = cardContent;
+    infoCard.style.backgroundColor = "#deb887";
+    infoCard.style.width = "fit-content";
+
+    infoCard.style.margin = "10px";
+    infoCard.style.padding = "5px";
+    infoCard.style.fontSize = "20px";
+    infoCard.style.borderRadius = "10px";
+    countryInfoContainer.appendChild(infoCard);
+  }
+}
+
+function infoArrayFunc(array, name) {
+  if (name === "Borders") {
+    return array.map((entry) => entry);
+  }
+  if (name === "Languages") {
+    return array.map((entry) => entry.name);
+  }
+  if (name === "Currency") {
+    return array.map((entry) => entry.name);
+  }
 }
 
 export { updateUI };
