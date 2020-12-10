@@ -16,7 +16,9 @@ The back-end is a RESTful server using Express
 
 npm install -- to install all dependencies
 
-npm start -- to launch app in the browser
+npm run build -- production webpack build
+
+npm start -- to launch app (dev build) in the browser
 
 npm run server -- to start Node/Express backend server running on port 8080
 
