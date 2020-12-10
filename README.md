@@ -16,8 +16,8 @@ The back-end is a RESTful server using Express
 
 npm install -- to install all dependencies
 
-npm start -- to start server running on port 8080
+npm start -- to launch app in the browser
 
-npm run dev -- to start development server
+npm run server -- to start Node/Express backend server running on port 8080
 
 npm run test -- run Jest testing suite
